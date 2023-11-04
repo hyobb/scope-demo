@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active: development
+  datasource:
+    url: jdbc:postgresql://${db.hostname}:${db.port}/${db.dbname}
+    username: ${db.username}
+    password: ${db.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      additional-paths: .
+      trigger-file: reload.txt
+  jwt:
+    header: Authorization
+    token-validity-in-seconds: 86400
+  servlet:
+    multipart:
+      file-size-threshold: 2KB
+      max-file-size: 3000MB
+      max-request-size: 4000MB
+  security:
+    user:
+      name: user
+      password: 1234
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+      springframework:
+        transaction:
+          interceptor: trace
+springdoc:
+  swagger-ui:
+    path: /springdoc/swagger-ui.html
+    disable-swagger-default-url: true
+    enable: true
+    url: /springdoc/api-docs
+  api-docs:
+    path: /springdoc/api-docs
+    resolve-schema-properties: true
